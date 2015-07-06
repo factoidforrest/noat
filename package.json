@@ -1,0 +1,44 @@
+{
+  "name": "Noat",
+  "version": "0.0.0",
+  "engines": {
+    "node": "0.12.x"
+  },
+  "config": {
+    "unsafe-perm": true
+  },
+  "description": "",
+  "main": "server.coffee",
+  "dependencies": {
+    "bookshelf": "^0.8.1",
+    "coffee-middleware": "~0.2.1",
+    "coffee-script": "~1.7.1",
+    "connect-coffee-script": "~0.2.0",
+    "express": "~3.4.8",
+    "jade": "~1.3.0",
+    "knex": "^0.8.6",
+    "node": "~0.0.0",
+    "node-sass-middleware": "^0.9.0",
+    "pg": "^4.4.0",
+    "sass": "~0.5.0",
+    "sass-middleware": "~0.0.3",
+    "serve-favicon": "~2.1.5",
+    "twitter-bootstrap-node": "~0.1.2"
+  },
+  "devDependencies": {
+    "coffee-script": "~1.7.1"
+  },
+  "scripts": {
+    "postinstall": "knex migrate:latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://git@github.com:light24bulbs/noat.git"
+  },
+  "author": "Forrest Allison",
+  "license": "GPL",
+  "bugs": {
+    "url": "https://github.com/light24bulbs/node-template/issues"
+  },
+  "homepage": "https://github.com/light24bulbs/node-template"
+}

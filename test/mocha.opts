@@ -1,0 +1,3 @@
+--compilers coffee:coffee-script/register
+-b
+-t 8000
