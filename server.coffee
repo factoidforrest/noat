@@ -5,7 +5,7 @@ coffeescript = require('connect-coffee-script')
 sass = require('node-sass-middleware')
 path = require('path')
 favicon = require('serve-favicon')
-
+require('./views/build_system')
 production = process.env.PRODUCTION == 'true'
 
 app.use(express.compress())
@@ -24,13 +24,14 @@ app.use(sass({
 }))
 
 #TODO: switch to a compiler with compression support
+###
 app.use(coffeescript({
   src: __dirname + '/views/js',
   dest: __dirname + '/public',
   bare: true,
   compress: production
 }))
-
+###
 if production
   cachetime = 86400000
 else
@@ -40,10 +41,14 @@ else
 app.use(express.static(__dirname + '/public', { maxAge: cachetime }))
 
 #static file routes
-
-require('./server/routes')(app)
+require('./server/config/roles')(app)
+require('./server/config/routes')(app)
 #app.get('/', handlers.home)
 #app.get('/tables/:table?', handlers.tables)
 
-app.listen(process.env.PORT || 3000)
+port = process.env.PORT || 3000
+app.listen(port)
+console.log('Server Launched on ': port)
+
+
 
