@@ -18,15 +18,9 @@ module.exports = (app) ->
 
 	app.use(roles.middleware())
 
-	roles.use 'POS', POS
-
 	roles.use 'logged in', loggedIn
 
-	#some of the endpoints can be used by both the POS or a normal
-	roles.use 'user or POS', (req) ->
-		loggedIn(req) or POS(req)
 
-		
 	roles.use 'admin', (req) -> 
 		if req.user? and req.user.get('admin') == true 
 			return true
