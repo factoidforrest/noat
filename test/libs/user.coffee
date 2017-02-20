@@ -6,6 +6,7 @@ hooksCreated = false
 request = require("supertest")
 
 module.exports.createHooks = (params) ->
+	console.log('creating user creation hooks')
 	unless hooksCreated
 		before (done) ->
 			module.exports.createUser params, done

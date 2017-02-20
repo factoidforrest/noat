@@ -1,4 +1,3 @@
-passport = require 'passport'
 
 
 #TODO move most of this logic out of here and into the user model

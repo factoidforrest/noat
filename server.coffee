@@ -8,9 +8,17 @@ favicon = require('serve-favicon')
 require('./views/build_system')
 production = process.env.PRODUCTION == 'true'
 
-app.use(express.compress())
+global.async = require('asyncawait/async')
+global.await = require('asyncawait/await')
+#COMPRESSION
+compression = require('compression')
+app.use(compression())
+
+#LOGGING
+require('./server/services/logging')(app)
+
+
 app.set('views', __dirname + '/views')
-app.use(express.logger())
 app.use(favicon(path.join(__dirname,'public','images','favicon.ico')))
 app.locals.uglify = production
 
@@ -48,7 +56,7 @@ require('./server/config/routes')(app)
 
 port = process.env.PORT || 3000
 app.listen(port)
-console.log('Server Launched on ': port)
+logger.log('info', 'Server Launched on port': port)
 
 
 

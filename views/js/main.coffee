@@ -1,4 +1,5 @@
 React = require('react')
+ReactDOM = require('react-dom')
 r = require('r-dom')
 $ = global.jQuery = require('jquery')
 #bootstrap = require('bootstrap')
@@ -27,7 +28,7 @@ class ParentComponent extends React.Component
 element = r(ParentComponent)
 
 $(document).ready ->
-  React.render(element, $('#react-container')[0])
+  ReactDOM.render(element, $('#react-container')[0])
 ###
 
 

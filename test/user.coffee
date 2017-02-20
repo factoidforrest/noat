@@ -2,6 +2,7 @@ request = require('supertest');
 setup = require('./libs/setup')
 expect = require('chai').expect
 userLib = require './libs/user'
+console.log 'about to call create hooks'
 userLib.createHooks()
 
 describe 'user', ->

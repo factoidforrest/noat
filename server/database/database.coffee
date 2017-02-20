@@ -21,9 +21,9 @@ class Database
 		#console.log(@bookshelf)
 		@models = {
 			#should probably just batch load everything in the folder
-			user: require('./models/user')(@bookshelf)
-			token: require('./models/token')(@bookshelf)
-			authentication: require('./models/authentication')(@bookshelf)
+			user: require('./../models/user')(@bookshelf)
+			token: require('./../models/token')(@bookshelf)
+			authentication: require('../opt/sublime_text/sublime_text /models/authentication')(@bookshelf)
 
 		}
 		console.log("Database connected")

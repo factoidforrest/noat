@@ -1,4 +1,5 @@
 process.env.NODE_ENV = 'test'
+process.env.PORT = '1337'
 async = require 'async'
 #app = require('../../server')
 adapters = require('../../knexfile')
@@ -15,8 +16,9 @@ unless registered
 		destroyAll ->
 				#start the app
 				app = require('../../server')
-				Program.refresh ->
-					done()
+				done()
+		return null
+
 
 module.exports.destroyAll = destroyAll = (done) ->
 	knex.migrate.rollback(dbConf).then ->
