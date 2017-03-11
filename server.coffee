@@ -8,8 +8,8 @@ favicon = require('serve-favicon')
 require('./views/build_system')
 production = process.env.PRODUCTION == 'true'
 
-global.async = require('asyncawait/async')
-global.await = require('asyncawait/await')
+#global.async = require('asyncawait/async')
+#global.await = require('asyncawait/await')
 #COMPRESSION
 compression = require('compression')
 app.use(compression())
@@ -48,11 +48,14 @@ else
 #static assets
 app.use(express.static(__dirname + '/public', { maxAge: cachetime }))
 
+
 #static file routes
 require('./server/config/roles')(app)
 require('./server/config/routes')(app)
 #app.get('/', handlers.home)
 #app.get('/tables/:table?', handlers.tables)
+
+
 
 port = process.env.PORT || 3000
 app.listen(port)

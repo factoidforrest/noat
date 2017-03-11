@@ -1,15 +1,16 @@
 watchify = require('watchify')
 browserify = require('browserify')
+coffeeify = require 'coffeeify'
 gulp = require('gulp')
 source = require('vinyl-source-stream')
 buffer = require('vinyl-buffer')
 gutil = require('gulp-util')
 sourcemaps = require('gulp-sourcemaps')
 assign = require('lodash.assign')
-coffeeify = require 'coffeeify'
+
 # add custom browserify options here
 customOpts = 
-  entries: [ './views/js/main.coffee' ]
+  entries: [ './views/js/main.js' ]
   debug: process.env.NODE_ENV != 'production'
 opts = assign({}, watchify.args, customOpts)
 
