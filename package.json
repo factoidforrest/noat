@@ -5,6 +5,7 @@
     "express": "^4.15.3",
     "express-winston": "^2.4.0",
     "knex": "^0.13.0",
+    "pg": "^6.2.3",
     "winston": "^2.3.1"
   }
 }

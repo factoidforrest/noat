@@ -54,6 +54,6 @@ module.exports = (app) => {
         winstonInstance: logger
     }));
 
-
+    return logger;
 }
-return logger;
+
