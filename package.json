@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "compression": "^1.6.2",
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "express-winston": "^2.4.0",
+    "winston": "^2.3.1"
   }
 }
