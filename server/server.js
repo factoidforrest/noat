@@ -4,6 +4,8 @@ const express = require("express");
 
 let app = express();
 
+global.production = process.env.NODE_ENV === 'production';
+
 const logger = global.logger = require('./services/logger')(app);
 //global.app = app;
 

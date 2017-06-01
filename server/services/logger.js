@@ -6,7 +6,7 @@ let logger;
 module.exports = (app) => {
 
     //logging
-    let production = process.env.NODE_ENV === 'production';
+
     let logLevel = production ? 'info' : 'silly';
     logger = new (winston.Logger)();
     /*
@@ -53,5 +53,7 @@ module.exports = (app) => {
     app.use(expressWinston.logger({
         winstonInstance: logger
     }));
-};
+
+
+}
 return logger;
