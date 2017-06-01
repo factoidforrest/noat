@@ -29,11 +29,6 @@ class Database {
 }
 
 
-
-
-
-
-
 //connect the db the first time this file is required by server.coffee
 let db = global.db = new Database();
 
