@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     seeds: {
-      directory: './server/database/seeds/'
+      directory: './server/seeds/'
     },
     client: 'postgresql',
     connection: {
@@ -11,12 +11,12 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations',
-      directory: __dirname + "/server/database/migrations"
+      directory: __dirname + "/server/migrations"
     }
   },
   test: {
     seeds: {
-      directory: './server/database/seeds/'
+      directory: './server/seeds/'
     },
     client: 'postgresql',
     connection: process.env.TEST_DATABASE_URL || {
@@ -26,13 +26,13 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations',
-      directory: __dirname + "/server/database/migrations"
+      directory: __dirname + "/server/migrations"
     }
   },
   production: {
     client: 'postgresql',
     seeds: {
-      directory: './server/database/seeds/'
+      directory: './server/seeds/'
     },
     connection: process.env.DATABASE_URL,
     pool: {
@@ -41,7 +41,7 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations',
-      directory: __dirname + "/server/database/migrations"
+      directory: __dirname + "/server/migrations"
     }
   }
 };
