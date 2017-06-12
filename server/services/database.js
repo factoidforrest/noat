@@ -18,7 +18,7 @@ class Database {
         this.bookshelf = require('bookshelf')(this.knex);
         this.bookshelf.plugin('virtuals');
         this.bookshelf.plugin('visibility');
-        console.log(this.bookshelf);
+        //console.log(this.bookshelf);
         this.models = {
             //user: require('./../models/user')(this.bookshelf),
             //token: require('./../models/token')(this.bookshelf),

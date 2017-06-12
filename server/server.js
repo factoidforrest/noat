@@ -6,7 +6,7 @@ let app = express();
 
 global.production = process.env.NODE_ENV === 'production';
 
-const logger = global.logger = require('./services/logger')(app);
+const logger = require('./services/logger')(app);
 const db = require('./services/database');
 //global.app = app;
 
