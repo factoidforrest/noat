@@ -20,7 +20,7 @@ class Database {
         this.bookshelf.plugin('visibility');
         //console.log(this.bookshelf);
         this.models = {
-            //user: require('./../models/user')(this.bookshelf),
+            post: require('./../models/post')(this.bookshelf),
             //token: require('./../models/token')(this.bookshelf),
             //authentication: require('./../models/authentication')(this.bookshelf)
         };

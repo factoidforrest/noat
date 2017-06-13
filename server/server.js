@@ -26,4 +26,3 @@ require('./services/errorhandler').middleware(app);
 port = process.env.PORT || 3000;
 
 app.listen(port);
-
