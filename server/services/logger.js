@@ -53,7 +53,7 @@ module.exports = (app) => {
     app.use(expressWinston.logger({
         winstonInstance: logger
     }));
-    lobal.logger = logger;
+    global.logger = logger;
     return logger;
 }
 
