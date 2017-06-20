@@ -3,7 +3,7 @@ module.exports.middleware = (app) => {
     app.use((err, req, res, next) => {
         logger.log('error',
             'Error thrown on request. Route:',
-            req.route,
+            req.originalUrl,
             ' Error body: ',
             err,
             ' FROM REQUEST ',

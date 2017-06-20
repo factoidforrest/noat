@@ -1,4 +1,4 @@
 module.exports = (app) => {
 
-    app.use('/posts', require('../controllers/posts'))
+    app.use('/post', require('../controllers/posts'))
 };

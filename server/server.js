@@ -2,7 +2,7 @@
 const express = require("express");
 
 
-let app = express();
+let app = global.app = express();
 
 global.production = process.env.NODE_ENV === 'production';
 
@@ -26,3 +26,5 @@ require('./services/errorhandler').middleware(app);
 port = process.env.PORT || 3000;
 
 app.listen(port);
+
+module.exports = app;

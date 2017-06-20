@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "bookshelf": "^0.10.3",
     "compression": "^1.6.2",
     "express": "^4.15.3",
@@ -10,5 +11,8 @@
   },
   "scripts": {
     "start": "nodemon server/server.js"
+  },
+  "devDependencies": {
+    "supertest": "^3.0.0"
   }
 }
