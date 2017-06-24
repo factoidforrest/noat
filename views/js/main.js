@@ -6,6 +6,8 @@ const $ = global.jQuery = require('jquery');
 const rbs = require('react-bootstrap');
 //const mobx = require('mobx-react');
 import {observer} from 'mobx-react';
+import {observable} from 'mobx';
+import {computed} from 'mobx'
 const mobx = require('mobx');
 
 
@@ -16,35 +18,37 @@ class incrementStore {
     constructor() {
         mobx.autorun(() => console.log(this.report));
     }
-    get getNumber() {
+    @computed get getNumber() {
         return number;
     }
 
     increment() {
+        console.log('increment called');
         number += 1;
     }
 }
 
 @observer
 class Incrementer extends React.Component {
-    store = new incrementStore();
 
-    constructor(){
-        super();
-    }
+
+    //constructor(){
+    //    super();
+    //}
     //@observer
     render() {
 
         return(r.div([
-            r.h1("#{this.props.count}"),
-            r(rbs.Button, {bsStyle: 'info', onClick:store.increment}[r.span('Increment')])
+            r.h1(null, `${this.props.store.getNumber}`),
+            r(rbs.Button, {bsStyle: 'info', onClick:this.props.store.increment},
+                [r.span('Increment')])
         ]))
     }
 }
 
 
 
-let mainElement = r(Incrementer);
+let mainElement = r(Incrementer, {store: new incrementStore()});
 
 $(document).ready(()=> {
     ReactDOM.render(mainElement, $('#react-container')[0]);
