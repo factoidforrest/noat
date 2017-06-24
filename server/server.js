@@ -1,8 +1,11 @@
+const production = process.env.PRODUCTION == 'true'
 
 const express = require("express");
 
 
 let app = global.app = express();
+require('./services/serveFrontEnd')(app);
+
 
 global.production = process.env.NODE_ENV === 'production';
 
@@ -15,8 +18,10 @@ compression = require('compression');
 app.use(compression());
 
 app.get('/', (req,res)=> {
-    res.status(200).send("Hello World")
+    res.render('main')
 });
+
+
 
 //ROUTER LOGIC
 require('./services/router')(app);

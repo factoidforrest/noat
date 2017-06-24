@@ -36,10 +36,9 @@ const gutil = require('gulp-util');
 const sourcemaps = require('gulp-sourcemaps');
 const assign = require('lodash.assign');
 
-
 let customBrowserifyOpts = {
     entries: ['./views/js/main.js'],
-    debug: process.env.NODE_ENV !== 'production'
+    debug: true//process.env.NODE_ENV !== 'production'
 };
 
 let browserifyOpts = assign({}, watchify.args, customBrowserifyOpts);
@@ -49,15 +48,16 @@ let b = watchify(browserify(browserifyOpts));
 
 bundle = function() {
     return b
-        .transform(babelify, {presets: ["es2015", "react"], plugins: ["transform-decorators"], sourceMaps: true})
+        .transform(babelify)
         .bundle()
-        .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+        .on('error', gutil.log.bind(gutil, 'Browserify Stack Threw Error'))
         .pipe(source('bundle.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(uglify())
+        //.pipe(uglify())
+        //.on('error', gutil.log.bind(gutil, 'Uglify I think Threw Error'))
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./public'));
+        .pipe(gulp.dest('./views/public'));
 };
 
 gulp.task('js', bundle);

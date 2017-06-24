@@ -1,38 +1,53 @@
-const React = require('react')
-const ReactDOM = require('react-dom')
+const React = require('react');
+const ReactDOM = require('react-dom');
 const r = require('r-dom')
-const $ = global.jQuery = require('jquery')
+const $ = global.jQuery = require('jquery');
 //bootstrap = require('bootstrap')
-const rbs = require('react-bootstrap')
+const rbs = require('react-bootstrap');
+//const mobx = require('mobx-react');
 import {observer} from 'mobx-react';
+const mobx = require('mobx');
+
+
+
+class incrementStore {
+    @observable number = 0;
+
+    constructor() {
+        mobx.autorun(() => console.log(this.report));
+    }
+    get getNumber() {
+        return number;
+    }
+
+    increment() {
+        number += 1;
+    }
+}
 
 @observer
 class Incrementer extends React.Component {
-    displayName= 'HelloComponent';
-    constructor=()=> {
-        @observable let count = 0;
-    };
+    store = new incrementStore();
 
-
-
-    @computed get incrementedNumber() {
-        counterStore.count += Math.Random()
+    constructor(){
+        super();
     }
-
     //@observer
-    render=()=> {
+    render() {
+
         return(r.div([
             r.h1("#{this.props.count}"),
-            r(rbs.Button, {bsStyle: 'info', onClick:Incrementer.increment}[r.span('Increment')])
+            r(rbs.Button, {bsStyle: 'info', onClick:store.increment}[r.span('Increment')])
         ]))
     }
 }
 
 
-let element = r(Incrementer);
+
+let mainElement = r(Incrementer);
 
 $(document).ready(()=> {
-    ReactDOM.render(element, $('#react-container')[0]);
+    ReactDOM.render(mainElement, $('#react-container')[0]);
 });
 
 /*
