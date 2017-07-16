@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
         t.uuid('id').defaultTo(knex.raw('uuid_generate_v4()')).primary(); //index automatic with primary key
 
         t.string('email').index();
-        t.string('username');
+        t.string('username').unique();
         t.string('password');
         t.string('confirmation_token').index();
         t.boolean('admin').defaultTo(false);

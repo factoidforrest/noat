@@ -4,6 +4,7 @@ process.env.NODE_ENV = 'test';
 
 process.env.PORT = 1234;
 
+global.testEmail = 'light24bulbs@gmail.com'
 
 adapters = require('../../knexfile');
 

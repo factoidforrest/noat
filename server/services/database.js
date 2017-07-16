@@ -21,7 +21,9 @@ class Database {
         //console.log(this.bookshelf);
         this.models = {
             post: require('./../models/post')(this.bookshelf),
-            //token: require('./../models/token')(this.bookshelf),
+            token: require('./../models/token')(this.bookshelf),
+            user: require('./../models/user')(this.bookshelf)
+
             //authentication: require('./../models/authentication')(this.bookshelf)
         };
         logger.log('info',"Database connected");
