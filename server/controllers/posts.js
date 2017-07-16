@@ -1,11 +1,14 @@
 
 const catchErr = require('../services/errorhandler').catchErr;
 const express = require('express');
-const router = express.Router();
+//const router = express.Router();
 
-router.get('/list', catchErr(async function(req, res){
-    let posts = await Post.fetchAll()
-    return res.status(200).send(posts)
-}));
+module.exports = (app) => {
 
-module.exports = router;
+    app.get('/posts/list', catchErr(async function (req, res) {
+        let posts = await Post.fetchAll();
+        logger.log('info', 'fetched posts for post list: ', posts)
+        return res.status(200).send(posts)
+    }));
+
+};

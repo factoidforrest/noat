@@ -15,16 +15,19 @@ const mobx = require('mobx');
 class incrementStore {
     @observable number = 0;
 
-    constructor() {
+    constructor(number) {
         mobx.autorun(() => console.log(this.report));
+        this.number = number;
     }
+    /*
     @computed get getNumber() {
-        return number;
+        return this.number;
     }
+    */
 
     increment() {
         console.log('increment called');
-        number += 1;
+        this.number += 1;
     }
 }
 
@@ -37,9 +40,9 @@ class Incrementer extends React.Component {
     //}
     //@observer
     render() {
-
+        console.log('render called and props.store is ', this.props.store);
         return(r.div([
-            r.h1(null, `${this.props.store.getNumber}`),
+            r.h1(null, `${this.props.store.number}`),
             r(rbs.Button, {bsStyle: 'info', onClick:this.props.store.increment},
                 [r.span('Increment')])
         ]))

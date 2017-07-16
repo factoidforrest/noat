@@ -1,4 +1,5 @@
-const production = process.env.PRODUCTION == 'true'
+
+const production = process.env.PRODUCTION === 'true';
 
 const express = require("express");
 
@@ -22,7 +23,9 @@ app.get('/', (req,res)=> {
 });
 
 
-
+app.get('/posts/list2', (req,res)=>{
+    return res.status(200).send('Worked!')
+});
 //ROUTER LOGIC
 require('./services/router')(app);
 

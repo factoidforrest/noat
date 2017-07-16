@@ -37,7 +37,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const assign = require('lodash.assign');
 
 let customBrowserifyOpts = {
-    entries: ['./views/js/main.js'],
+    entries: ['./views/js/components/index.js'],
     debug: true//process.env.NODE_ENV !== 'production'
 };
 
