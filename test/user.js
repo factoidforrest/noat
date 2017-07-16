@@ -3,17 +3,11 @@ const colors = require('colors');
 const request = require('supertest');
 const assert = require('assert');
 require('../server/server');
-/*
+
 describe('Posts', function() {
     //REWRITE
     before(function(){
         console.log("--------------------User------------------------------------------------------------".bold.cyan.bgBlue)
-        let post = new Post({
-            "title":"Post Title",
-            "body":"Post Body"
-        });
-        return post.save();
-
     });
     describe('/user/register', function() {
         it('should return a list with one post', function() {
@@ -35,5 +29,3 @@ describe('Posts', function() {
         });
     });
 });
-
-    */mocha

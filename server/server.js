@@ -15,8 +15,11 @@ const db = require('./services/database');
 //global.app = app;
 
 //compression
-compression = require('compression');
+const compression = require('compression');
+const bodyParser = require('body-parser');
+
 app.use(compression());
+app.use(bodyParser.json());
 
 app.get('/', (req,res)=> {
     res.render('main')

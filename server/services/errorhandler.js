@@ -20,7 +20,7 @@ module.exports.catchErr = (fn) => {
         let promise = fn(req, res, next);
         if (!promise.catch) return;
         promise.catch(function (err) {
-            console.log('error caught and thrown down the express middleware chain');
+            //console.log('error caught and thrown down the express middleware chain');
             return next(err);
         });
     }

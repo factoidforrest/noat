@@ -6,7 +6,6 @@ const catchErr = require('../services/errorhandler').catchErr;
 module.exports = (app) => {
 
     app.get('/posts/list', catchErr(async function (req, res) {
-        throw new Error();
         let posts = await Post.fetchAll();
         logger.log('info', 'fetched posts for post list: ', posts);
         return res.status(200).send(posts)
