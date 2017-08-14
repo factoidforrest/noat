@@ -45,7 +45,7 @@ module.exports = (bookshelf) => {
             let user = await User.where({username: username.toLowerCase()}).fetch();
             if (!user) {
                 return {code: 404, errName: 'UserNotFound'};
-            } else if (await !checkPassword) {
+            } else if (await !user.checkPassword(password)) {
                 return {code: 401, errName: 'PasswordIncorrect'};
             } else {
                 let token = await user.generateLoginToken();
@@ -57,7 +57,7 @@ module.exports = (bookshelf) => {
 
         register: async function (userAttrs) {
             if (userAttrs.password.length < 6) return {code: 422, errName: 'passwordTooShort'}; //validate best practices on the client
-            let forgedUser = User.forge({username:username.toLowerCase()});
+            let forgedUser = User.forge({username:userAttrs.username.toLowerCase()});
             if (await forgedUser.fetch()) return {code:400, errName: 'usernameTaken'};
             await forgedUser.setPassword(userAttrs.password);
             return {code:200, user: await forgedUser.save()};
