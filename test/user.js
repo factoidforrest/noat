@@ -93,7 +93,6 @@ describe('Users', function() {
                 .then( res => {
                     console.log(res.body);
                     assert(res.body.errName === "PasswordIncorrect")
-
                 });
 
         })
