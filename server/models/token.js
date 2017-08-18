@@ -6,42 +6,39 @@ Mail = Promise.promisifyAll require '../../services/mail'
 
 
 const crypto = require('crypto');
-
+const {promisify} = require('util');
 const moment = require('moment');
 
 module.exports = function(bookshelf) {
   global.Token = bookshelf.Model.extend({
     tableName: 'tokens',
     hasTimestamps: true,
-    visible: ['key', 'created_at'],
+    visible: ['random_key', 'created_at'],
     virtuals: {
       key: function() {
         return this.unhashedKey;
       }
     },
     initialize: function() {
-      return this.on('creating', function(model, attrs, options) {
-        let deferred = Promise.pending();
-        model.generateToken(null, function() {
-          logger.info('token created');
-          return deferred.resolve('token created');
-        });
-        return deferred.promise;
+      return this.on('creating', async function(model, attrs, options) {
+        await model.generateToken(null);
+        logger.info('token created');
+        return null;//Promise.resolve('token created');
       });
     },
     tokenable: function() {
       return this.morphTo('tokenable', User);
     },
-    generateToken: function(length, next) {
+    generateToken: async function(length) {
       length || (length = 48);
       console.log('generating token with length', length);
-      return crypto.randomBytes(length, (ex, buf)=> {
-        console.log('token generated');
-        let key = buf.toString("hex");
-        self.unhashedKey = key;
-        self.set('hashed_key', Token.hash(key));
-        return next();
-      });
+      let buf = await promisify(crypto.randomBytes)(length);
+      let key = buf.toString("hex");
+      logger.log('verbose', 'token key generated ', key);
+      //this.unhashedKey = key;
+      this.set('random_key', key);  //cant use the word key, it's reserved.  Spent two hours on that one >_<
+      logger.log('verbose', 'token attrs after key set are  ', this);
+
     },
     expired: function(timeLength, timeUnits) {
       if (moment().subtract(timeLength, timeUnits).isAfter(this.get('createdAt'))) {

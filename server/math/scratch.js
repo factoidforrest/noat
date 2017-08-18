@@ -1,6 +1,6 @@
 const PCA = require('ml-pca');
 const {Matrix} = require('ml-matrix');
-//const dataset = require('ml-dataset-iris').getNumbers();
+//let dataset = require('ml-dataset-iris').getNumbers();
 // dataset is a two-dimensional array where rows represent the samples and columns the features
 
 
@@ -11,9 +11,10 @@ let times = function(n, iterator) {
     return accum;
 };
 
-
-let voteArray = times(200, (i)=>{
-    return times(100, (i)=>{
+let numComments = 200;
+let numVotes = 100;
+let voteArray = times(numComments, (i)=>{
+    return times(numVotes, (i)=>{
         return Math.floor(Math.random() * (2 - (-1))) -1;
     })
 });
@@ -32,8 +33,8 @@ const pca = new PCA(dataset, {center:true, scale:true});
   0.005212183873275558 ]
 */
 
-
-console.log(pca.predict(dataset)); // project new points into the PCA space
+//startTime = new Date();
+console.log(pca.predict(dataset).subMatrix(0,numComments - 1,0,1)); // project new points into the PCA space
 let runTime = new Date() - startTime;
 console.log('PCA executed in ', runTime);
 

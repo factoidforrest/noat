@@ -9,7 +9,7 @@ module.exports.middleware = (app) => {
             ' FROM REQUEST ',
             req.body
         );
-        res.status(err.responseCode || 500).send(err.toString());
+        res.status(err.responseCode || 500).send(err);
     })
 };
 

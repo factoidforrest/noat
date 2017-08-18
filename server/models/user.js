@@ -2,8 +2,10 @@ const bcrypt = require('bcrypt');
 
 module.exports = (bookshelf) => {
     let User = global.User = bookshelf.Model.extend({
-        tableName: 'user',
+        tableName: 'users',
         hasTimestamps: true,
+        hidden: ['password', 'confirmation_token'],
+        virtuals: {},
         /*
          constructor: function() {
          bookshelf.Model.apply(this, arguments);
@@ -13,10 +15,11 @@ module.exports = (bookshelf) => {
          }
          */
 
+
         setPassword: async function(password) {
-            let hash = await bcrypt.hash(password, null, null);
+            let hash = await bcrypt.hash(password, 12, null);
             this.set('password', hash);
-            Promise.resolve(hash);
+            return Promise.resolve(hash);
         },
 
         checkPassword: function(passwordToCheck) {
@@ -45,13 +48,12 @@ module.exports = (bookshelf) => {
             let user = await User.where({username: username.toLowerCase()}).fetch();
             if (!user) {
                 return {code: 404, errName: 'UserNotFound'};
-            } else if (await !user.checkPassword(password)) {
+            } else if (!await user.checkPassword(password)) {
                 return {code: 401, errName: 'PasswordIncorrect'};
             } else {
                 let token = await user.generateLoginToken();
                 return {code: 200, user: user, token: token};
             }
-
         },
 
 
@@ -60,8 +62,7 @@ module.exports = (bookshelf) => {
             let forgedUser = User.forge({username:userAttrs.username.toLowerCase()});
             if (await forgedUser.fetch()) return {code:400, errName: 'usernameTaken'};
             await forgedUser.setPassword(userAttrs.password);
-            return {code:200, user: await forgedUser.save()};
-
+            return {code:200, user: await forgedUser.save(), success: true};
         }
     });
 };
