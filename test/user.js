@@ -18,14 +18,11 @@ describe('Users', function() {
                     password: 'password',
                     email: testEmail
                 })
-                //.expect('Content-Type', /json/)
                 .expect(200)
                 .then( res => {
                     console.log(res.body);
                     assert(res.body.success === true);
-
                 });
-
         });
 
         it('should fail if username taken', function(){
@@ -36,14 +33,12 @@ describe('Users', function() {
                     password: 'password',
                     email: testEmail
                 })
-                //.expect('Content-Type', /json/)
                 .expect(400)
                 .then( res => {
                     console.log(res.body);
                     assert(res.body.errName === 'usernameTaken');
-
                 });
-        })
+        });
 
         it('should fail if password is too short',function(){
             return request(app)
@@ -53,12 +48,10 @@ describe('Users', function() {
                     password: '2shrt',
                     email: testEmail
                 })
-                //.expect('Content-Type', /json/)
                 .expect(422)
                 .then( res => {
                     console.log(res.body);
                     assert(res.body.errName === 'passwordTooShort');
-
                 });
         })
     });
@@ -71,14 +64,11 @@ describe('Users', function() {
                     username: 'testuser',
                     password: 'password'
                 })
-                //.expect('Content-Type', /json/)
                 .expect(200)
                 .then( res => {
                     console.log(res.body);
                     assert(!!res.body.user);
-
                 });
-
         });
 
         it('should fail to login with wrong credentials', function() {
@@ -88,7 +78,6 @@ describe('Users', function() {
                     username: 'testuser',
                     password: 'wrongpassword'
                 })
-                //.expect('Content-Type', /json/)
                 .expect(401)
                 .then( res => {
                     console.log(res.body);

@@ -45,7 +45,7 @@
     "winston": "^2.3.1"
   },
   "scripts": {
-    "start": "nodemon server/server.js"
+    "start": "nodemon server/server.js --use_strict"
   },
   "devDependencies": {
     "ml-dataset-iris": "^1.0.0",
