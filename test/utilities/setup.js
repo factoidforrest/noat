@@ -4,26 +4,63 @@ process.env.NODE_ENV = 'test';
 
 process.env.PORT = 1234;
 
-global.testEmail = 'light24bulbs@gmail.com'
+global.testEmail = 'light24bulbs+test@gmail.com';
+global.setupEmail = 'light24bulbs+allcalls@gmail.com';
 
 adapters = require('../../knexfile');
-
+const request = require('supertest');
 dbConf = adapters[process.env.NODE_ENV];
 
 knex = require('knex')(dbConf);
 
 registered = false;
 
+
+let user;
+let app;
+module.exports.user = null;
+module.exports.key = null;
+
 if (!registered) {
     console.log('registering destroy hook');
-    before(function() {
+    before(async function() {
         console.log('setup before hook called');
         registered = true;
-        return destroyAll(function() {
-            let app = require('../../server/server');
+        await destroyAll(function() {
+            app = require('../../server/server');
             return Promise.resolve();
         });
+        await registerUser();
+        return login();
     });
+}
+
+function registerUser(){
+    return request(app)
+        .post('/user/register')
+        .send({
+            username: 'testuserglobal',
+            password: 'password',
+            email: testEmail
+        })
+        .expect(200)
+        .then( res => {
+            module.exports.user = res.body.user;
+            console.log('registered user in setup ', res.body)
+        });
+}
+function login(){
+    return request(app)
+        .post('/user/login')
+        .send({
+            username: 'testuserglobal',
+            password: 'password'
+        })
+        .expect(200)
+        .then( res => {
+            module.exports.key = res.body.token.random_key;
+            console.log('got token in setup ', res.body)
+        });
 }
 
 module.exports.destroyAll = destroyAll = function(done) {
