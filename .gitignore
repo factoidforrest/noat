@@ -3,3 +3,7 @@ node_modules
 .idea/
 .sass-cache/
 .tmp/
+bundle.js
+bundle.js.map
+
+

@@ -1,3 +1,2 @@
---compilers coffee:coffee-script/register
 -b
--t 8000
+-t 15000
